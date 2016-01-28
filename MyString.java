@@ -1,5 +1,5 @@
 /*
- * Author: 
+ * Author: Maxwell Fraser
  * Program 1 - MyString
  * CSC230-02 Spring 2016
  */
