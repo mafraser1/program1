@@ -97,24 +97,6 @@ public class MyString {
     return isEqual;
     }
     
-    public boolean equals(String str){
-        boolean isEqual = true;
-        if (currLength != str.length())
-            isEqual = false;
-        else{
-            for(int i= 0; i<currLength; i++){
-                if (strChar[i] == str.charAt(i)){
-                    isEqual = true;
-                }
-                else{
-                    isEqual = false;
-                    i = currLength;
-                }
-            }
-        }
-    return isEqual;
-    }
-    
     public int compareTo(MyString str){
         int compare = 0;
         //loop checks each character
