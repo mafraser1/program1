@@ -19,7 +19,7 @@ public class MyString {
     public MyString(String str){
         currLength = str.length();
         ensureCapacity();
-        for (int i = 0; i < currLength; i++){
+        for (int i=0; i<currLength; i++){
             strChar[i] = str.charAt(i);
         }
         
@@ -28,7 +28,7 @@ public class MyString {
     public MyString(MyString str){
         currLength = str.length();
         ensureCapacity();
-        for (int i = 0; i < currLength; i++){
+        for (int i=0; i<currLength; i++){
             strChar[i] = str.get(i);
         }
     }
@@ -45,7 +45,7 @@ public class MyString {
     //loop creates a string using each index of the character array
     public String toString(){
         String newStr = null;
-        for(int i = 0; i < currLength; i++){
+        for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
         return newStr;
@@ -54,10 +54,10 @@ public class MyString {
     //uses two loops to combine the two arrays into a new MyString character array
     public MyString concat(MyString str){
         String newStr = null;
-        for(int i = 0; i < currLength; i++){
+        for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
-        for(int i = 0; i < str.Length; i++){
+        for(int i=0; i<str.Length; i++){
             newStr += str.get(i);
         }
         MyString myStr = new MyString(newStr);
@@ -67,7 +67,7 @@ public class MyString {
     //uses a single loop to combine the character array with a string for a new MyString
     public MyString concat(String str){
         String newStr = null;
-        for(int i = 0; i < currLength; i++){
+        for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
         newStr += str;
@@ -84,7 +84,7 @@ public class MyString {
         //otherwise loop checks each index of the two arrays to see if they match
         //loop is broken if characters do not match
         else{
-            for(int i= 0; i<currLength; i++){
+            for(int i=0; i<currLength; i++){
                 if (strChar[i] == str.get(i)){
                     isEqual = true;
                 }
@@ -101,7 +101,7 @@ public class MyString {
         int compare = 0;
         //loop checks each character
         //if a character is greater than or less than another it will break the loop
-        for (int i = 0; i<currLength; i++){
+        for (int i=0; i<currLength; i++){
             if(strChar[i] < str.get(i)){
                 compare = -1;
                 i = currLength;
@@ -131,5 +131,72 @@ public class MyString {
             return strChar[0];
         }
         return strChar[index];
+    }
+    
+    //loops goes through the char array and makes all chars uppercase
+    public MyString toUpper(){
+        String upStr = null;
+        for (int i=0; i<currLength; i++){            
+           upStr += Character.toUpperCase(strChar[i]);
+        }
+        MyString upperStr = new MyString(upStr);
+        return upperStr;
+    }
+    
+    //similar loop does the same to make all chars lowercase
+    public MyString toLower(){
+        String lwStr = null;
+        for (int i=0; i<currLength; i++){            
+           lwStr += Character.toLowerCase(strChar[i]);
+        }
+        MyString lowerStr = new MyString(lwStr);
+        return lowerStr;
+    }
+    
+    //
+    public int indexOf(MyString str){
+        int index = -1;
+        for(int i=0; i<str.length(); i++){
+            if (strChar[0] == str.get(i)){
+                int counter = 0;
+                for (int j=i; j< str.length(); j++){
+                    if (strChar[0] == str.get(j)){
+                        counter++;
+                        if(counter == currLength){
+                            index = i;
+                            return index;
+                        }
+                    }
+                    
+                    else{
+                        counter = 0;
+                    }
+                } 
+            }
+        }
+        return index;
+    }
+    
+    public int lastIndexOf(MyString str){
+        int index = -1;
+        for(int i=0; i<str.length(); i++){
+            if (strChar[0] == str.get(i)){
+                int counter = 0;
+                for (int j=i; j< str.length(); j++){
+                    if (strChar[0] == str.get(j)){
+                        index = i;
+                        counter++;
+                        if(counter == currLength){
+                            index = i;
+                        }
+                    }
+                    
+                    else{
+                        counter = 0;
+                    }
+                } 
+            }
+        }
+        return index;
     }
 }
