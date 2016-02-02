@@ -44,7 +44,7 @@ public class MyString {
     
     //loop creates a string using each index of the character array
     public String toString(){
-        String newStr = null;
+        String newStr = "";
         for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
@@ -53,7 +53,7 @@ public class MyString {
     
     //uses two loops to combine the two arrays into a new MyString character array
     public MyString concat(MyString str){
-        String newStr = null;
+        String newStr = "";
         for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
@@ -66,7 +66,7 @@ public class MyString {
     
     //uses a single loop to combine the character array with a string for a new MyString
     public MyString concat(String str){
-        String newStr = null;
+        String newStr = "";
         for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
@@ -120,14 +120,14 @@ public class MyString {
     public char get(int index){
         //If the integer beyond the range, it will return the last character
         if(index >= currLength){
-            System.out.println("ERROR: Integer not in range.\n"
-                    + "Returning last character of MyString.");
+            System.out.println("\nERROR: Integer not in range.\n"
+                    + "Returning last character of MyString.\n");
             return strChar[currLength-1];
         }
         //If the integer is negative, it will return the first character
         if(index < 0){
-            System.out.println("ERROR: Integer not in range.\n"
-                    + "Returning first character of MyString.");
+            System.out.println("\nERROR: Integer not in range.\n"
+                    + "Returning first character of MyString.\n");
             return strChar[0];
         }
         return strChar[index];
@@ -135,7 +135,7 @@ public class MyString {
     
     //loops goes through the char array and makes all chars uppercase
     public MyString toUpper(){
-        String upStr = null;
+        String upStr = "";
         for (int i=0; i<currLength; i++){            
            upStr += Character.toUpperCase(strChar[i]);
         }
@@ -145,7 +145,7 @@ public class MyString {
     
     //similar loop does the same to make all chars lowercase
     public MyString toLower(){
-        String lwStr = null;
+        String lwStr = "";
         for (int i=0; i<currLength; i++){            
            lwStr += Character.toLowerCase(strChar[i]);
         }
@@ -156,24 +156,24 @@ public class MyString {
     
     public int indexOf(MyString str){
         int index = -1;
-        //Checks for the first char of MyString in the MyString in the arguement
-        for(int i=0; i<str.length(); i++){
+        //Checks for the first char of MyString in the calling object
+        for(int i=0; i<currLength; i++){
             //if it finds a match it check the proceeding characters
-            if (strChar[0] == str.get(i)){
-                //counter ensures it does not go past the length of the MyString
+            if (strChar[i] == str.get(0)){
+                //counter searches the parameter array, and ends the loop if it matches
                 int counter = 0;
-                for (int j=i; j< str.length(); j++){
-                    if (strChar[0] == str.get(j)){
+                for (int j=i; j< currLength; j++){
+                    if (strChar[j] == str.get(counter)){
                         counter++;
-                        //if everything matches up it returns the index where the MyString was found
-                        if(counter == currLength){
+                        if(counter == str.length()){
                             index = i;
-                            return index;
+                            j = currLength;
+                            i = currLength;
                         }
                     }
-                    //if not the counter is reset to 0
+                    //ends nested loop if no match
                     else{
-                        counter = 0;
+                        j = currLength;
                     }
                 } 
             }
@@ -185,20 +185,21 @@ public class MyString {
     //Instead of returning upon the first match, it continues to search and returns afterward    
     public int lastIndexOf(MyString str){
         int index = -1;
-        for(int i=0; i<str.length(); i++){
-            if (strChar[0] == str.get(i)){
+        for(int i=0; i<currLength; i++){
+            if (strChar[i] == str.get(0)){
                 int counter = 0;
-                for (int j=i; j< str.length(); j++){
-                    if (strChar[0] == str.get(j)){
-                        index = i;
+                for (int j=i; j< currLength; j++){
+                    if (strChar[j] == str.get(counter)){
                         counter++;
-                        if(counter == currLength){
+                        if(counter == str.length()){
                             index = i;
+                            //Unlike indexOf it only breaks the nested loop on match
+                            j = currLength;
                         }
                     }
-                    
+                    //ends nested loop if no match
                     else{
-                        counter = 0;
+                        j = currLength;
                     }
                 } 
             }
@@ -208,7 +209,7 @@ public class MyString {
     
     //Loop starts at the given int and creates a new MyString from that point onward
     public MyString substring(int start){
-        String subStr = null;
+        String subStr = "";
         for(int i=start; i<currLength; i++){
             subStr += strChar[i];
         }
@@ -218,7 +219,7 @@ public class MyString {
     
     //Loop starts at given int and ends at the other int to creat a new MyString
     public MyString substring(int start, int end){
-        String subStr = null;
+        String subStr = "";
         for(int i=start; i<=end; i++){
             subStr += strChar[i];
         }
