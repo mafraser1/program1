@@ -57,7 +57,7 @@ public class MyString {
         for(int i=0; i<currLength; i++){
             newStr += strChar[i];
         }
-        for(int i=0; i<str.Length; i++){
+        for(int i=0; i<str.length(); i++){
             newStr += str.get(i);
         }
         MyString myStr = new MyString(newStr);
@@ -79,7 +79,7 @@ public class MyString {
     public boolean equals(MyString str){
         boolean isEqual = true;
         //short circuits the process by checking to see if the length matches first
-        if (currLength != str.length)
+        if (currLength != str.length())
             isEqual = false;
         //otherwise loop checks each index of the two arrays to see if they match
         //loop is broken if characters do not match
@@ -153,21 +153,25 @@ public class MyString {
         return lowerStr;
     }
     
-    //
+    
     public int indexOf(MyString str){
         int index = -1;
+        //Checks for the first char of MyString in the MyString in the arguement
         for(int i=0; i<str.length(); i++){
+            //if it finds a match it check the proceeding characters
             if (strChar[0] == str.get(i)){
+                //counter ensures it does not go past the length of the MyString
                 int counter = 0;
                 for (int j=i; j< str.length(); j++){
                     if (strChar[0] == str.get(j)){
                         counter++;
+                        //if everything matches up it returns the index where the MyString was found
                         if(counter == currLength){
                             index = i;
                             return index;
                         }
                     }
-                    
+                    //if not the counter is reset to 0
                     else{
                         counter = 0;
                     }
@@ -177,6 +181,8 @@ public class MyString {
         return index;
     }
     
+    //Uses a similar process as indexOf, but only sets the index when found
+    //Instead of returning upon the first match, it continues to search and returns afterward    
     public int lastIndexOf(MyString str){
         int index = -1;
         for(int i=0; i<str.length(); i++){
@@ -198,5 +204,25 @@ public class MyString {
             }
         }
         return index;
+    }
+    
+    //Loop starts at the given int and creates a new MyString from that point onward
+    public MyString substring(int start){
+        String subStr = null;
+        for(int i=start; i<currLength; i++){
+            subStr += strChar[i];
+        }
+        MyString subMyStr = new MyString(subStr);
+        return subMyStr;
+    }
+    
+    //Loop starts at given int and ends at the other int to creat a new MyString
+    public MyString substring(int start, int end){
+        String subStr = null;
+        for(int i=start; i<=end; i++){
+            subStr += strChar[i];
+        }
+        MyString subMyStr = new MyString(subStr);
+        return subMyStr;
     }
 }
