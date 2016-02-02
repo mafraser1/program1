@@ -18,7 +18,7 @@ public class MyString {
     
     public MyString(String str){
         currLength = str.length();
-        ensureCapacity();
+        strChar = new char[currLength];
         for (int i=0; i<currLength; i++){
             strChar[i] = str.charAt(i);
         }
@@ -27,7 +27,7 @@ public class MyString {
     
     public MyString(MyString str){
         currLength = str.length();
-        ensureCapacity();
+        strChar = new char[currLength];
         for (int i=0; i<currLength; i++){
             strChar[i] = str.get(i);
         }
@@ -36,10 +36,20 @@ public class MyString {
     public int length(){
         return currLength;
     }
-    
-    //sets the array's length to the current length
+    //increases arraay by 1
     private void ensureCapacity(){
-        strChar = new char[currLength];
+        if (strChar == null){
+            strChar = new char[1];
+            currLength = 1;
+        }
+        else{
+            char[] newStrChar = new char[currLength+1];
+            for(int i=0; i<currLength; i++){
+                newStrChar[i] = strChar[i];
+            }
+            strChar = newStrChar.clone();
+            currLength++;
+        }
     }
     
     //loop creates a string using each index of the character array
