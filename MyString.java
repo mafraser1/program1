@@ -47,7 +47,7 @@ public class MyString {
             for(int i=0; i<currLength; i++){
                 newStrChar[i] = strChar[i];
             }
-            strChar = newStrChar.clone();
+            strChar = newStrChar;
             currLength++;
         }
     }
